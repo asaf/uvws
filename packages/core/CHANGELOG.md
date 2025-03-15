@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v0.0.3 (2025-03-15)
+
+### Bug Fixes
+
+- **core**: A modification to core
+  ([`cd163ce`](https://github.com/asaf/uvws/commit/cd163ceaa99ea7433aa8363ea8b3094ac17ee89e))
+
+
 ## v0.0.2 (2025-03-15)
 
 ### Bug Fixes
