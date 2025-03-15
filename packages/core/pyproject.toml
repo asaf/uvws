@@ -1,6 +1,6 @@
 [project]
 name = "core"
-version = "0.0.0"
+version = "0.0.1"
 description = "Add your description here"
 readme = "README.md"
 authors = [
@@ -33,13 +33,6 @@ allow_zero_version = true
 tag_format = "core-{version}"
 version_toml = ["pyproject.toml:project.version"]
 version_variables = ["src/core/__init__.py:__version__"]
-
-
-
-[tool.semantic_release.commit_parser_options]
-scope_pattern = 'core(?:-[\w-]+)?'
-scope_optional = false
-
 
 
 [semantic_release.branches.main]
