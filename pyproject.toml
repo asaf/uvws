@@ -1,6 +1,6 @@
 [project]
 name = "uvws"
-version = "0.0.0"
+version = "0.0.1"
 description = "Add your description here!"
 readme = "README.md"
 authors = [
@@ -37,7 +37,7 @@ version_toml = ["pyproject.toml:project.version"]
 version_variables = ["src/uvws/__init__.py:__version__"]
 
 [tool.semantic_release.commit_parser_options]
-path_filters=["wtf"]
+path_filters=[".", "!packages/core/*", "!packages/svc1/*"]
 
 [semantic_release.branches.main]
 match = "main"
