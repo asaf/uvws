@@ -1,7 +1,7 @@
 [project]
 name = "uvws"
 version = "0.1.0"
-description = "Add your description here"
+description = "Add your description here!"
 readme = "README.md"
 authors = [
     { name = "Asaf Shakarzy", email = "asaf000@gmail.com" }
