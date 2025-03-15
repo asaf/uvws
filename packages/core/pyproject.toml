@@ -34,19 +34,14 @@ tag_format = "core-{version}"
 version_toml = ["pyproject.toml:project.version"]
 version_variables = ["src/core/__init__.py:__version__"]
 
-
 [semantic_release.branches.main]
 match = "main"
 prerelease = false
-
-
 
 [semantic_release.branches.beta]
 match = "beta"
 prerelease = true
 prerelease_token = "beta"
 
-
 [tool.semantic_release.publish]
 dist_glob_patterns = ["../../dist/core-*"]
-
