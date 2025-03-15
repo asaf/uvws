@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v0.0.4 (2025-03-15)
+
+### Bug Fixes
+
+- Core package minor change!
+  ([`31da89d`](https://github.com/asaf/uvws/commit/31da89dfcfdc9f554fb1982c20c953651183368c))
+
+
 ## v0.0.3 (2025-03-15)
 
 ### Bug Fixes
