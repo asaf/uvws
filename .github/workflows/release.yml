@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  release-setup:
+  release:
     runs-on: ubuntu-latest
     env:
       GITHUB_ACTOR: "asaf"  
@@ -70,17 +70,14 @@ jobs:
 
           printf '%s\n' "Verified upstream branch has not changed, continuing with release..."
 
-  release:
-    runs-on: ubuntu-latest
-    needs: release-setup
-    steps:
+      
       - name: Action | Semantic Version Release (core package)
         id: release_core
         # Adjust tag with desired version if applicable.
         uses: python-semantic-release/python-semantic-release@v9.21.0
         with:
           root_options: "-vv"
-          directory: /github/workspace/packages/core
+          directory: ./packages/core
           github_token: ${{ secrets.GITHUB_TOKEN }}
           git_committer_name: "github-actions"
           git_committer_email: "actions@users.noreply.github.com"
@@ -99,6 +96,6 @@ jobs:
         if: steps.release_core.outputs.released == 'true'
         with:
           root_options: "-vv"
-          directory: /github/workspace/packages/core
+          directory: ./packages/core
           github_token: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ steps.release_core.outputs.tag }}
