@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  release:
+  release-setup:
     runs-on: ubuntu-latest
     env:
       GITHUB_ACTOR: "asaf"  
@@ -70,7 +70,10 @@ jobs:
 
           printf '%s\n' "Verified upstream branch has not changed, continuing with release..."
 
-      
+  release:
+    runs-on: ubuntu-latest
+    needs: release-setup
+    steps:
       - name: Action | Semantic Version Release (core package)
         id: release_core
         # Adjust tag with desired version if applicable.
