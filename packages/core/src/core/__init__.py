@@ -6,4 +6,4 @@ def main() -> None:
 
 
 def hi() -> str:
-    return "hi from core :)!!!! WOW 0.0.12!"
+    return "hi from core :)!!!! WOW 0.0.13!"
