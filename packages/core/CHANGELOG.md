@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v0.0.10 (2025-03-16)
+
+### Bug Fixes
+
+- **core**: Another init fix
+  ([`bb2ab86`](https://github.com/asaf/uvws/commit/bb2ab8687ef6e776718a86d1d85848a55fe01cfb))
+
+
 ## v0.0.9 (2025-03-16)
 
 ### Bug Fixes
