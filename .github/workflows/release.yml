@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  release:
+  release-packages:
     runs-on: ubuntu-latest
     env:
       GITHUB_ACTOR: "asaf"  
@@ -17,6 +17,12 @@ jobs:
     permissions:
       id-token: write
       contents: write
+
+    strategy:
+      matrix:
+        package:
+          - core
+          - svc1
 
     steps:
       # Note: We checkout the repository at the branch that triggered the workflow
@@ -30,72 +36,32 @@ jobs:
         with:
           ref: ${{ github.ref_name }}
           fetch-depth: 0
-
-      - name: Evaluate | Verify upstream has NOT changed
-        # Last chance to abort before causing an error as another PR/push was applied to
-        # the upstream branch while this workflow was running. This is important
-        # because we are committing a version change (--commit). You may omit this step
-        # if you have 'commit: false' in your configuration.
-        #
-        # You may consider moving this to a repo script and call it from this step instead
-        # of writing it in-line.
-        shell: bash
-        run: |
-          set +o pipefail
-
-          UPSTREAM_BRANCH_NAME="$(git status -sb | head -n 1 | cut -d' ' -f2 | grep -E '\.{3}' | cut -d'.' -f4)"
-          printf '%s\n' "Upstream branch name: $UPSTREAM_BRANCH_NAME"
-
-          set -o pipefail
-
-          if [ -z "$UPSTREAM_BRANCH_NAME" ]; then
-              printf >&2 '%s\n' "::error::Unable to determine upstream branch name!"
-              exit 1
-          fi
-
-          git fetch "${UPSTREAM_BRANCH_NAME%%/*}"
-
-          if ! UPSTREAM_SHA="$(git rev-parse "$UPSTREAM_BRANCH_NAME")"; then
-              printf >&2 '%s\n' "::error::Unable to determine upstream branch sha!"
-              exit 1
-          fi
-
-          HEAD_SHA="$(git rev-parse HEAD)"
-
-          if [ "$HEAD_SHA" != "$UPSTREAM_SHA" ]; then
-              printf >&2 '%s\n' "[HEAD SHA] $HEAD_SHA != $UPSTREAM_SHA [UPSTREAM SHA]"
-              printf >&2 '%s\n' "::error::Upstream has changed, aborting release..."
-              exit 1
-          fi
-
-          printf '%s\n' "Verified upstream branch has not changed, continuing with release..."
-
       
-      - name: Action | Semantic Version Release (core package)
-        id: release_core
+      - name: Action | Semantic Version Release (${{ matrix.package }} package)
+        id: release_package
         # Adjust tag with desired version if applicable.
         uses: python-semantic-release/python-semantic-release@v9.21.0
         with:
           root_options: "-vv"
-          directory: ./packages/core
+          directory: ./packages/${{ matrix.package }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
           git_committer_name: "github-actions"
           git_committer_email: "actions@users.noreply.github.com"
 
       - name: Publish | Upload package to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
-        if: steps.release_core.outputs.released == 'true'
+        if: steps.release_${{ matrix.package }}.outputs.released == 'true'
         with:
           packages-dir: ./dist
           repository-url: https://firstly-welcome-crane.ngrok-free.app
           user: TODO
           password: TODO
 
-      - name: Publish | Upload to GitHub Release Assets (core package)
+      - name: Publish | Upload to GitHub Release Assets (${{ matrix.package }} package)
         uses: python-semantic-release/publish-action@v9.21.0
-        if: steps.release_core.outputs.released == 'true'
+        if: steps.release_${{ matrix.package }}.outputs.released == 'true'
         with:
           root_options: "-vv"
-          directory: ./packages/core
+          directory: ./packages/${{ matrix.package }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          tag: ${{ steps.release_core.outputs.tag }}
+          tag: ${{ steps.release_package.outputs.tag }}
