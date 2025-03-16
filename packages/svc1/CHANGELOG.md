@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v0.0.3 (2025-03-16)
+
+### Bug Fixes
+
+- **svc1**: Svc1 change!
+  ([`c53abdd`](https://github.com/asaf/uvws/commit/c53abdde61a7c8dda76448eb07abe75c13298426))
+
+
 ## v0.0.2 (2025-03-16)
 
 ### Bug Fixes
