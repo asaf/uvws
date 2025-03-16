@@ -88,6 +88,9 @@ jobs:
         with:
           packages-dir: ./packages/dist
           repository-url: https://9e53-2a0d-6fc2-4990-1500-acc8-805c-2209-5778.ngrok-free.app
+          user: TODO
+          password: TODO
+
 
       - name: Publish | Upload to GitHub Release Assets (core package)
         uses: python-semantic-release/publish-action@v9.21.0
