@@ -28,6 +28,9 @@ example
 - **core**: Version is forgotten in core
   ([`051ed75`](https://github.com/asaf/uvws/commit/051ed753f52bc1e11a19d9e38461112a35cc5a51))
 
+- **core**: Yey
+  ([`0213f9b`](https://github.com/asaf/uvws/commit/0213f9baa7bb3dcfba62c636546c8fd2c4d35b23))
+
 ### Chores
 
 - Corrections
