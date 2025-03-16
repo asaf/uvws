@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v0.0.2 (2025-03-16)
+
+### Bug Fixes
+
+- **svc1**: Another init fix
+  ([`a5c6d73`](https://github.com/asaf/uvws/commit/a5c6d73bb13299511147bf7a340925cc6c617ef0))
+
+
 ## v0.0.1 (2025-03-16)
 
 ### Bug Fixes
