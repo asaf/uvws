@@ -50,7 +50,7 @@ jobs:
 
       - name: Publish | Upload package to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
-        if: steps.release_${{ matrix.package }}.outputs.released == 'true'
+        if: steps.release_package.outputs.released == 'true'
         with:
           packages-dir: ./dist
           repository-url: https://firstly-welcome-crane.ngrok-free.app
@@ -59,7 +59,7 @@ jobs:
 
       - name: Publish | Upload to GitHub Release Assets (${{ matrix.package }} package)
         uses: python-semantic-release/publish-action@v9.21.0
-        if: steps.release_${{ matrix.package }}.outputs.released == 'true'
+        if: steps.release_package.outputs.released == 'true'
         with:
           root_options: "-vv"
           directory: ./packages/${{ matrix.package }}
