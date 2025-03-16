@@ -1,6 +1,19 @@
 # CHANGELOG
 
 
+## v0.0.11 (2025-03-16)
+
+### Bug Fixes
+
+- **core**: Another init fix
+  ([`ab4c7e0`](https://github.com/asaf/uvws/commit/ab4c7e08b2dfa97ac26067405d598baf1d4fea0e))
+
+### Chores
+
+- Wf change plus pyprojec core
+  ([`4d6ac90`](https://github.com/asaf/uvws/commit/4d6ac90ec9fefbb4ccc563ffb861e2ce4a685f1e))
+
+
 ## v0.0.10 (2025-03-16)
 
 ### Bug Fixes
