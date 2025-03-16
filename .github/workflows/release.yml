@@ -8,6 +8,8 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
+    env:
+      GITHUB_ACTOR: "asaf"  
     concurrency:
       group: ${{ github.workflow }}-release-${{ github.ref_name }}
       cancel-in-progress: false
@@ -28,17 +30,7 @@ jobs:
         with:
           ref: ${{ github.ref_name }}
           fetch-depth: 0
-      
-      - name: Debug | Verify Commit Exists
-        run: |
-          echo "Checking if commit ${{ github.sha }} exists..."
-          git rev-parse --verify ${{ github.sha }} || echo "Commit does NOT exist!"
-        
 
-      - name: Setup | Force release branch to be at workflow sha
-        run: |
-          git reset --hard ${{ github.sha }}
-      
       - name: Evaluate | Verify upstream has NOT changed
         # Last chance to abort before causing an error as another PR/push was applied to
         # the upstream branch while this workflow was running. This is important
@@ -78,111 +70,31 @@ jobs:
 
           printf '%s\n' "Verified upstream branch has not changed, continuing with release..."
 
-  
-
-
-# name: Continuous Delivery
-
-# on:
-#   push:
-#     branches:
-#       - main
-
-# jobs:
-#   release:
-#     runs-on: ubuntu-latest
-#     concurrency:
-#       group: ${{ github.workflow }}-release-${{ github.ref_name }}
-#       cancel-in-progress: false
-
-#     permissions:
-#       id-token: write
-#       contents: write
-
-#     steps:
-#       - name: Setup | Checkout Repository on Release Branch
-#         uses: actions/checkout@v4
-#         with:
-#           ref: ${{ github.ref_name }}
-#           fetch-depth: 0
-
-#       - name: Setup | Force release branch to be at workflow SHA
-#         run: |
-#           git reset --hard ${{ github.sha }}
-
-#       - name: Evaluate | Verify upstream has NOT changed
-#         shell: bash
-#         run: |
-#           set +o pipefail
-
-#           UPSTREAM_BRANCH_NAME="$(git status -sb | head -n 1 | cut -d' ' -f2 | grep -E '\.{3}' | cut -d'.' -f4)"
-#           printf '%s\n' "Upstream branch name: $UPSTREAM_BRANCH_NAME"
-
-#           set -o pipefail
-
-#           if [ -z "$UPSTREAM_BRANCH_NAME" ]; then
-#               printf >&2 '%s\n' "::error::Unable to determine upstream branch name!"
-#               exit 1
-#           fi
-
-#           git fetch "${UPSTREAM_BRANCH_NAME%%/*}"
-
-#           if ! UPSTREAM_SHA="$(git rev-parse "$UPSTREAM_BRANCH_NAME")"; then
-#               printf >&2 '%s\n' "::error::Unable to determine upstream branch sha!"
-#               exit 1
-#           fi
-
-#           HEAD_SHA="$(git rev-parse HEAD)"
-
-#           if [ "$HEAD_SHA" != "$UPSTREAM_SHA" ]; then
-#               printf >&2 '%s\n' "[HEAD SHA] $HEAD_SHA != $UPSTREAM_SHA [UPSTREAM SHA]"
-#               printf >&2 '%s\n' "::error::Upstream has changed, aborting release..."
-#               exit 1
-#           fi
-
-#           printf '%s\n' "Verified upstream branch has not changed, continuing with release..."
-
-#       - name: Action | Semantic Version Release (api package)
-#         id: release_api
-#         uses: 
-#         with:
-#           root_options: "-vv"
-#           directory: ./packages/api
-#           github_token: ${{ secrets.GITHUB_TOKEN }}
-#           git_committer_name: "github-actions"
-#           git_committer_email: "actions@users.noreply.github.com"
-
-#       # - name: Publish | Upload package to PyPI
-#       #   uses: pypa/gh-action-pypi-publish@release/v1
-#       #   if: steps.release_api.outputs.released == 'true'
-#       #   with:
-#       #     packages-dir: ./packages/api/dist
-#       #     repository-url: https://9e53-2a0d-6fc2-4990-1500-acc8-805c-2209-5778.ngrok-free.app/legacy
-
-#       - name: Publish | Upload to GitHub Release Assets (api package)
-#         uses: python-semantic-release/publish-action@v9.21.0
-#         if: steps.release_api.outputs.released == 'true'
-#         with:
-#           root_options: "-vv"
-#           directory: ./packages/api
-#           github_token: ${{ secrets.GITHUB_TOKEN }}
-#           tag: ${{ steps.release_api.outputs.tag }}
       
-#       - name: Action | Semantic Version Release (server package)
-#         id: release_server
-#         uses: asaf/python-semantic-release@feat/issue1215
-#         with:
-#           root_options: "-vv"
-#           directory: ./packages/server
-#           github_token: ${{ secrets.GITHUB_TOKEN }}
-#           git_committer_name: "github-actions"
-#           git_committer_email: "actions@users.noreply.github.com"
+      - name: Action | Semantic Version Release (core package)
+        id: release_core
+        # Adjust tag with desired version if applicable.
+        uses: python-semantic-release/python-semantic-release@v9.21.0
+        with:
+          root_options: "-vv"
+          directory: ./packages/core
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          git_committer_name: "github-actions"
+          git_committer_email: "actions@users.noreply.github.com"
 
-#       - name: Publish | Upload to GitHub Release Assets (server package)
-#         uses: python-semantic-release/publish-action@v9.21.0
-#         if: steps.release_server.outputs.released == 'true'
-#         with:
-#           directory: ./packages/server
-#           github_token: ${{ secrets.GITHUB_TOKEN }}
-#           tag: ${{ steps.release_server.outputs.tag }}
+      - name: Publish | Upload package to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        if: steps.release_core.outputs.released == 'true'
+        with:
+          packages-dir: ./packages/api/dist
+          repository-url: https://9e53-2a0d-6fc2-4990-1500-acc8-805c-2209-5778.ngrok-free.app
 
+      - name: Publish | Upload to GitHub Release Assets (core package)
+        uses: python-semantic-release/publish-action@v9.21.0
+        if: steps.release_core.outputs.released == 'true'
+        with:
+          root_options: "-vv"
+          directory: ./packages/api
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ steps.release_core.outputs.tag }}
+      
