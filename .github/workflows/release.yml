@@ -87,7 +87,7 @@ jobs:
         if: steps.release_core.outputs.released == 'true'
         with:
           packages-dir: ./dist
-          repository-url: https://9e53-2a0d-6fc2-4990-1500-acc8-805c-2209-5778.ngrok-free.app
+          repository-url: https://firstly-welcome-crane.ngrok-free.app
           user: TODO
           password: TODO
 
