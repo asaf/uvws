@@ -94,7 +94,7 @@ jobs:
         if: steps.release_core.outputs.released == 'true'
         with:
           root_options: "-vv"
-          directory: ./packages/api
+          directory: ./dist
           github_token: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ steps.release_core.outputs.tag }}
       
