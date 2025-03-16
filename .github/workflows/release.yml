@@ -22,7 +22,7 @@ jobs:
       matrix:
         package:
           - core
-          - svc1
+          # - svc1
 
     steps:
       # Note: We checkout the repository at the branch that triggered the workflow
