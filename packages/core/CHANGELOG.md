@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v0.0.8 (2025-03-16)
+
+### Bug Fixes
+
+- **core**: Another init fix
+  ([`41d68fb`](https://github.com/asaf/uvws/commit/41d68fbf73812b9f25f3b669c873f6ca586ff0de))
+
+
 ## v0.0.7 (2025-03-16)
 
 ### Bug Fixes
