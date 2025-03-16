@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v0.0.9 (2025-03-16)
+
+### Bug Fixes
+
+- **core**: Publish from correct location
+  ([`b110214`](https://github.com/asaf/uvws/commit/b110214352ae8d34b852b85342710f129d749ae0))
+
+
 ## v0.0.8 (2025-03-16)
 
 ### Bug Fixes
