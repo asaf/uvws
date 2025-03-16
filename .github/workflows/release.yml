@@ -86,7 +86,7 @@ jobs:
         uses: pypa/gh-action-pypi-publish@release/v1
         if: steps.release_core.outputs.released == 'true'
         with:
-          packages-dir: ./packages/api/dist
+          packages-dir: ./packages/dist
           repository-url: https://9e53-2a0d-6fc2-4990-1500-acc8-805c-2209-5778.ngrok-free.app
 
       - name: Publish | Upload to GitHub Release Assets (core package)
