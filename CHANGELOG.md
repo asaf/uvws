@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v0.0.3 (2025-03-17)
+
+### Bug Fixes
+
+- Svc1 server start via uvws
+  ([`a07c4cf`](https://github.com/asaf/uvws/commit/a07c4cfd745f509156c933a529c793f2002c473a))
+
+
 ## v0.0.2 (2025-03-17)
 
 ### Bug Fixes
