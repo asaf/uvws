@@ -41,7 +41,24 @@ jobs:
         run: |
           git reset --hard ${{ github.sha }}
 
-        # Only build the UI if the package is 'svc1'
+      # Only build the UI if the package is 'svc1'
+      - name: Force Install Corepack and Enable
+        if: matrix.package == 'svc1'
+        run: npm install -g corepack && corepack enable
+
+      - name: Setup | Install Node.js
+        if: matrix.package == 'svc1'
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+
+      # https://github.com/actions/setup-node/issues/1222
+      # once resolved, replace with `- run: corepack enable`
+      - name: Force Install Corepack and Enable
+        if: matrix.package == 'svc1'
+        run: npm install -g corepack && corepack enable
+      
       - name: Setup | Enable Corepack & Install Node.js
         if: matrix.package == 'svc1'
         uses: actions/setup-node@v4
@@ -49,19 +66,13 @@ jobs:
           node-version: 20
           cache: 'pnpm'
 
-      - name: Setup | Enable Corepack
-        if: matrix.package == 'svc1'
-        run: |
-          corepack enable
-          corepack prepare pnpm@latest --activate
-
       - name: Install | Install Dependencies for UI
         if: matrix.package == 'svc1'
         run: |
           cd chat
           pnpm install --frozen-lockfile
 
-      - name: Build | Build React UI for svc1
+      - name: Build | Build UI for svc1
         if: matrix.package == 'svc1'
         run: |
           cd chat
