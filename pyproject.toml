@@ -16,6 +16,7 @@ svc1 = { workspace = true }
 
 [project.scripts]
 uvws = "uvws:main"
+svc1 = "svc1.main:start"
 
 [build-system]
 requires = ["hatchling"]
