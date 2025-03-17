@@ -150,3 +150,11 @@ jobs:
           user: TODO
           password: TODO
 
+      - name: Publish | Upload to GitHub Release Assets (Root) package
+        uses: python-semantic-release/publish-action@v9.21.0
+        if: steps.release_root.outputs.released == 'true'
+        with:
+          root_options: "-vv"
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ steps.release_root.outputs.tag }}
+
