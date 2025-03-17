@@ -52,6 +52,7 @@ jobs:
         with:
           node-version: 20
           cache: 'pnpm'
+          cache-dependency-path: chat/pnpm-lock.yaml
 
       # https://github.com/actions/setup-node/issues/1222
       # once resolved, replace with `- run: corepack enable`
