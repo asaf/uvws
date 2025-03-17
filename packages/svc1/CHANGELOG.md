@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v0.0.6 (2025-03-17)
+
+### Bug Fixes
+
+- **svc1**: Change
+  ([`f8900d6`](https://github.com/asaf/uvws/commit/f8900d6da9c83bfc9f203b9361cb55e41f622378))
+
+
 ## v0.0.5 (2025-03-17)
 
 ### Bug Fixes
