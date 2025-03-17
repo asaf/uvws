@@ -1,6 +1,19 @@
 # CHANGELOG
 
 
+## v0.1.0 (2025-03-17)
+
+### Chores
+
+- **svc1**: Update workspace dependencies [skip ci]
+  ([`d9443aa`](https://github.com/asaf/uvws/commit/d9443aa699f3083cd0820305dbf0910db93ae85a))
+
+### Features
+
+- **svc1**: New svc1 is coming
+  ([`8c3fca7`](https://github.com/asaf/uvws/commit/8c3fca730547779bcc8b18e3ddf62a41e2c267aa))
+
+
 ## v0.0.10 (2025-03-17)
 
 ### Bug Fixes

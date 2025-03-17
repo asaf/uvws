@@ -1,6 +1,6 @@
 from core import hi
 
-__version__ = "0.0.10"
+__version__ = "0.1.0"
 
 
 def main() -> None:
