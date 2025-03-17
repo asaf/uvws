@@ -37,6 +37,10 @@ jobs:
           ref: ${{ github.ref_name }}
           fetch-depth: 0
 
+      - name: Evaluate | Verify upstream has NOT changed
+        shell: bash
+        run: ./scripts/verify-upstream.sh
+
       - name: Setup | Force release branch to be at workflow sha
         run: |
           git reset --hard ${{ github.sha }}
@@ -126,6 +130,10 @@ jobs:
         with:
           ref: ${{ github.ref_name }}
           fetch-depth: 0
+
+      - name: Evaluate | Verify upstream has NOT changed
+        shell: bash
+        run: ./scripts/verify-upstream.sh
 
       - name: Setup | Force release branch to be at workflow sha
         run: |
