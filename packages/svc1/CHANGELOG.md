@@ -1,6 +1,22 @@
 # CHANGELOG
 
 
+## v0.0.8 (2025-03-17)
+
+### Bug Fixes
+
+- **svc1**: Wow 0.0.8!
+  ([`7654f0d`](https://github.com/asaf/uvws/commit/7654f0d19362a036064f5aaa51bd7b5d3e63e557))
+
+### Chores
+
+- **svc1**: Update dependencies
+  ([`b9e0dfc`](https://github.com/asaf/uvws/commit/b9e0dfcb9f709a889a127b3cd0f0ea2cd6f0175c))
+
+- **svc1**: Update dependencies
+  ([`0973f42`](https://github.com/asaf/uvws/commit/0973f42a3600627b0a677e573534d567298047cf))
+
+
 ## v0.0.7 (2025-03-17)
 
 ### Bug Fixes
