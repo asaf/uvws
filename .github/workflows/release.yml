@@ -51,7 +51,9 @@ jobs:
 
       - name: Setup | Enable Corepack
         if: matrix.package == 'svc1'
-        run: corepack enable
+        run: |
+          corepack enable
+          corepack prepare pnpm@latest --activate
 
       - name: Install | Install Dependencies for UI
         if: matrix.package == 'svc1'
