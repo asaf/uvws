@@ -51,6 +51,7 @@ jobs:
     
   release-svc1:
     uses: ./.github/workflows/release-package.yml
+    needs: [release-core, build-chat]
     with:
       package: svc1
       artifact_name: chat-dist-${{ github.run_id }}
