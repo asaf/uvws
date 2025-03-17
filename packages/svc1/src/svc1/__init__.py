@@ -4,4 +4,4 @@ __version__ = "0.0.7"
 
 
 def main() -> None:
-    print("!!!!!!!!!:)", hi())
+    print("!!!!!!!!!:)!", hi())
