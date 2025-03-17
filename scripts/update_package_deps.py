@@ -116,7 +116,12 @@ def git_commit_and_push():
     )
     subprocess.run(["git", "add", str(PACKAGE_PYPROJECT)], check=True)
     subprocess.run(
-        ["git", "commit", "-m", f"chore({PACKAGE_NAME}): update dependencies"],
+        [
+            "git",
+            "commit",
+            "-m",
+            f"chore({PACKAGE_NAME}): update workspace dependencies [skip ci]",
+        ],
         check=True,
     )
     subprocess.run(["git", "push"], check=True)
