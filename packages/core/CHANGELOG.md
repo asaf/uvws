@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v0.1.0 (2025-03-17)
+
+### Features
+
+- **core**: Nice core version
+  ([`d0910eb`](https://github.com/asaf/uvws/commit/d0910ebe0d5b60b4e507cc4031b0a611b919afe3))
+
+
 ## v0.0.19 (2025-03-17)
 
 ### Bug Fixes
