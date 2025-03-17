@@ -2,7 +2,7 @@ from core import __version__ as core_version
 from svc1.main import __version__ as svc1_version
 from svc1.main import read_root
 
-__version__ = "0.0.4"
+__version__ = "0.0.5"
 
 
 def main() -> None:

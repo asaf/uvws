@@ -1,6 +1,72 @@
 # CHANGELOG
 
 
+## v0.0.5 (2025-03-17)
+
+### Bug Fixes
+
+- Expose versions
+  ([`2bf0de8`](https://github.com/asaf/uvws/commit/2bf0de802212bb1f4793c84b63946b4231e0cecf))
+
+### Chores
+
+- An attempt :)
+  ([`974fc17`](https://github.com/asaf/uvws/commit/974fc17744c3036c9733ee213a833a20958eeca8))
+
+- Attempt
+  ([`80ed221`](https://github.com/asaf/uvws/commit/80ed221a6f8513d32471cdd1e181c5242325622a))
+
+- Deps  ([`425cfe6`](https://github.com/asaf/uvws/commit/425cfe6c0af3d40573075bd22697f738f5998160))
+
+- Flow  ([`4a3cb68`](https://github.com/asaf/uvws/commit/4a3cb68b59bc2963445131aaf87068ea5ab7af61))
+
+- Flow  ([`5ba2fe4`](https://github.com/asaf/uvws/commit/5ba2fe4221ea143bc4d4ea1237bf59fb3790745a))
+
+- Not sure why
+  ([`017416e`](https://github.com/asaf/uvws/commit/017416e73c099bd5f0a8dde86824b86fb057de57))
+
+- Releae ([`3a6e553`](https://github.com/asaf/uvws/commit/3a6e553f77da546f8d0536cb86e247d3fa82a4bc))
+
+- Release
+  ([`b7c1bc9`](https://github.com/asaf/uvws/commit/b7c1bc95432dc54bfc40169cc495ece7f3b09b5d))
+
+- Release
+  ([`ffc8f94`](https://github.com/asaf/uvws/commit/ffc8f94742848644914a51b0889c34dd75b9a9e0))
+
+- Release
+  ([`6f9da39`](https://github.com/asaf/uvws/commit/6f9da39ba475ab997b6411f46c0891a1e022b320))
+
+- Release
+  ([`33ac3df`](https://github.com/asaf/uvws/commit/33ac3df60c8125d6ee307c1f9b779afead70448e))
+
+- Release
+  ([`829568a`](https://github.com/asaf/uvws/commit/829568af646ad1fe36efb5f079b0ffd63a04c515))
+
+- Release
+  ([`270d83b`](https://github.com/asaf/uvws/commit/270d83bf50b9ea71518adfa2e2e5b75781791a4e))
+
+- Release!
+  ([`23dd79c`](https://github.com/asaf/uvws/commit/23dd79ca79295c5013476e2ec1d2bf801425b305))
+
+- Update script commit msg
+  ([`3ce691c`](https://github.com/asaf/uvws/commit/3ce691c015557ad0844b3f3b773a891840f43025))
+
+- Wf  ([`78840ab`](https://github.com/asaf/uvws/commit/78840abf97d29dfe4a14d46d74db8f5a1789e359))
+
+- Wf  ([`2f348b3`](https://github.com/asaf/uvws/commit/2f348b302bc9c0261175556b6ed5ec180eba77fa))
+
+- Wf  ([`166fd99`](https://github.com/asaf/uvws/commit/166fd994eb2d24db60ef5fafb26e8a29138784a8))
+
+- Wf enable root
+  ([`14e6639`](https://github.com/asaf/uvws/commit/14e6639e1dbbb2f8069c1c7b376756a5d8167956))
+
+- **root**: Update workspace dependencies [skip ci]
+  ([`8f5681b`](https://github.com/asaf/uvws/commit/8f5681bfb8268fa3d2b4dab3aa38c7a54255090a))
+
+- **svc1**: Update dependencies
+  ([`b9e0dfc`](https://github.com/asaf/uvws/commit/b9e0dfcb9f709a889a127b3cd0f0ea2cd6f0175c))
+
+
 ## v0.0.4 (2025-03-17)
 
 ### Bug Fixes
