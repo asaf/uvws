@@ -1,6 +1,22 @@
 # CHANGELOG
 
 
+## v0.1.0 (2025-03-17)
+
+### Chores
+
+- Delete release TODO file
+  ([`514f1ab`](https://github.com/asaf/uvws/commit/514f1ab533467da29531e59b24334e7965daa81f))
+
+- **root**: Update workspace dependencies [skip ci]
+  ([`644fcc1`](https://github.com/asaf/uvws/commit/644fcc1d86eafdcbd4c5159fbe79e01b7f4d35e2))
+
+### Features
+
+- A new uvws!
+  ([`681785f`](https://github.com/asaf/uvws/commit/681785f09af89c526df500f3ea19c1f4f412bf6b))
+
+
 ## v0.0.5 (2025-03-17)
 
 ### Bug Fixes
