@@ -40,7 +40,33 @@ jobs:
       - name: Setup | Force release branch to be at workflow sha
         run: |
           git reset --hard ${{ github.sha }}
-      
+
+        # Only build the UI if the package is 'svc1'
+      - name: Setup | Enable Corepack & Install Node.js
+        if: matrix.package == 'svc1'
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+
+      - name: Setup | Enable Corepack
+        if: matrix.package == 'svc1'
+        run: corepack enable
+
+      - name: Install | Install Dependencies for UI
+        if: matrix.package == 'svc1'
+        run: |
+          cd chat
+          pnpm install --frozen-lockfile
+
+      - name: Build | Build React UI for svc1
+        if: matrix.package == 'svc1'
+        run: |
+          cd chat
+          pnpm build
+          mkdir -p ../packages/svc1/static
+          mv dist ../packages/svc1/static/
+
       - name: Action | Semantic Version Release (${{ matrix.package }} package)
         id: release_package
         uses: python-semantic-release/python-semantic-release@v9.21.0
