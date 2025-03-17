@@ -97,7 +97,7 @@ wheels = [
 
 [[package]]
 name = "core"
-version = "0.0.13"
+version = "0.0.14"
 source = { editable = "packages/core" }
 
 [package.metadata]
@@ -416,7 +416,7 @@ wheels = [
 
 [[package]]
 name = "svc1"
-version = "0.0.3"
+version = "0.0.6"
 source = { editable = "packages/svc1" }
 dependencies = [
     { name = "core" },
@@ -475,6 +475,9 @@ wheels = [
 name = "uvws"
 version = "0.0.1"
 source = { editable = "." }
+dependencies = [
+    { name = "svc1" },
+]
 
 [package.dev-dependencies]
 dev = [
@@ -482,6 +485,7 @@ dev = [
 ]
 
 [package.metadata]
+requires-dist = [{ name = "svc1", editable = "packages/svc1" }]
 
 [package.metadata.requires-dev]
 dev = [{ name = "python-semantic-release", specifier = ">=9.21.0" }]
