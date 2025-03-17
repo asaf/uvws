@@ -1,6 +1,21 @@
 # CHANGELOG
 
 
+## v0.0.2 (2025-03-17)
+
+### Bug Fixes
+
+- Nice!  ([`4a92611`](https://github.com/asaf/uvws/commit/4a926116da873a7c464dfa373602cac9708b34c9))
+
+### Chores
+
+- Release
+  ([`5f3d464`](https://github.com/asaf/uvws/commit/5f3d464ddcb5af497a461bdea875014aabe7affb))
+
+- Release
+  ([`23f0572`](https://github.com/asaf/uvws/commit/23f0572768c7b6085b9f69d725177f35e534441a))
+
+
 ## v0.0.1 (2025-03-17)
 
 ### Bug Fixes
