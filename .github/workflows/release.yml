@@ -10,20 +10,17 @@ permissions:
   id-token: write
 
 jobs:
-  # release-core:
-    - name: Setup | Checkout Repository
-      uses: actions/checkout@v4
-      with:
-        ref: ${{ github.ref_name }}
-        fetch-depth: 0
-    - name: Release | Call reusable package workflow
-      uses: ./.github/workflows/release-package.yml
+  release-core:
+    uses: ./.github/workflows/release-package.yml
     with:
       package: core
 
-  release-svc1:
+  build-chat:
     runs-on: ubuntu-latest
-    # needs: release-core
+    needs: release-core
+    concurrency:
+      group: ${{ github.workflow }}-release-svc1-${{ github.ref_name }}
+      cancel-in-progress: true
 
     steps:
       - name: Setup | Checkout Repository
@@ -31,29 +28,67 @@ jobs:
         with:
           ref: ${{ github.ref_name }}
           fetch-depth: 0
-
-
-      # https://github.com/actions/setup-node/issues/1222
-      # once resolved, replace with `- run: corepack enable`
+      
       - name: Force Install Corepack and Enable
         run: npm install -g corepack && corepack enable
-      
+
       - name: Install | Install Dependencies for UI
         run: |
           cd chat
           pnpm install --frozen-lockfile
-
+      
       - name: Build | Build UI for svc1
         run: |
           cd chat
           pnpm build
-          mv dist ../packages/svc1/static/
-      
-      # Call the generic release workflow AFTER svc1-specific setup
-      - name: Release | Call reusable package workflow
-        uses: ./.github/workflows/release-package.yml
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
         with:
-          package: svc1
+          name: chat-dist-${{ github.run_id }}
+          path: chat/dist
+          retention-days: 1
+    
+  release-svc1:
+    uses: ./.github/workflows/release-package.yml
+    with:
+      package: svc1
+      artifact_name: chat-dist-${{ github.run_id }}
+      artifact_target_path: packages/svc1/static/
+
+  # release-svc1:
+  #   runs-on: ubuntu-latest
+  #   # needs: release-core
+
+  #   steps:
+  #     - name: Setup | Checkout Repository
+  #       uses: actions/checkout@v4
+  #       with:
+  #         ref: ${{ github.ref_name }}
+  #         fetch-depth: 0
+
+
+  #     # https://github.com/actions/setup-node/issues/1222
+  #     # once resolved, replace with `- run: corepack enable`
+  #     - name: Force Install Corepack and Enable
+  #       run: npm install -g corepack && corepack enable
+      
+  #     - name: Install | Install Dependencies for UI
+  #       run: |
+  #         cd chat
+  #         pnpm install --frozen-lockfile
+
+  #     - name: Build | Build UI for svc1
+  #       run: |
+  #         cd chat
+  #         pnpm build
+  #         mv dist ../packages/svc1/static/
+      
+  #     # Call the generic release workflow AFTER svc1-specific setup
+  #     - name: Release | Call reusable package workflow
+  #       uses: ./.github/workflows/release-package.yml
+  #       with:
+  #         package: svc1
 
   # release-root:
   #   runs-on: ubuntu-latest

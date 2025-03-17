@@ -6,6 +6,13 @@ on:
       package:
         required: true
         type: string
+      artifact_name:
+        required: false
+        type: string
+      artifact_target_path:
+        required: false
+        type: string
+
 
 jobs:
   release-package:
@@ -19,11 +26,11 @@ jobs:
       contents: write
 
     steps:
-      # - name: Setup | Checkout Repository
-      #   uses: actions/checkout@v4
-      #   with:
-      #     ref: ${{ github.ref_name }}
-      #     fetch-depth: 0
+      - name: Setup | Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
 
       - name: Setup | Force release branch to be at workflow sha
         run: |
@@ -35,6 +42,14 @@ jobs:
 
       - name: Sync Dependencies | Update ${{ inputs.package }}'s workspace dependencies
         run: python scripts/update_package_deps.py ${{ inputs.package }}
+
+      - name: Download Artifacts
+        if: inputs.artifact_name != ''
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ inputs.artifact_name }}
+          path: ${{ inputs.artifact_target_path}}
+
 
       - name: Action | Semantic Version Release (${{ inputs.package }} package)
         id: release_package
