@@ -1,6 +1,22 @@
 # CHANGELOG
 
 
+## v0.0.16 (2025-03-17)
+
+### Bug Fixes
+
+- **core**: A 0.0.16 reease!
+  ([`ca6830b`](https://github.com/asaf/uvws/commit/ca6830b2a138e3043c85b220167b5a5f93cfcecc))
+
+### Chores
+
+- Not sure why
+  ([`017416e`](https://github.com/asaf/uvws/commit/017416e73c099bd5f0a8dde86824b86fb057de57))
+
+- **core**: Update dependencies
+  ([`eb3c9fb`](https://github.com/asaf/uvws/commit/eb3c9fb5c44264d46d033162ec723662fed992da))
+
+
 ## v0.0.15 (2025-03-17)
 
 ### Bug Fixes
