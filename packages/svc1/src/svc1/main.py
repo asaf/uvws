@@ -6,6 +6,8 @@ import uvicorn
 from fastapi import FastAPI, Response
 from fastapi.staticfiles import StaticFiles
 
+from svc1 import __version__
+
 app = FastAPI()
 
 
@@ -36,4 +38,5 @@ app.mount("/chat", SPAStaticFiles(directory=static_dir), name="static")
 
 
 def start():
+    print("Starting the server : " + __version__)
     uvicorn.run(app, host="0.0.0.0", port=8000)
