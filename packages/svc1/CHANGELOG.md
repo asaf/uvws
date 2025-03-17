@@ -1,6 +1,19 @@
 # CHANGELOG
 
 
+## v0.0.4 (2025-03-17)
+
+### Bug Fixes
+
+- **svc1**: Svc1 change, fastapi, yey
+  ([`b356a08`](https://github.com/asaf/uvws/commit/b356a08e91b552e311bb2fd7679c43142076bf74))
+
+### Chores
+
+- Chat ui, fastapi in svc1
+  ([`bd5912c`](https://github.com/asaf/uvws/commit/bd5912c8bffb2c6ec2f34c7fe0da178c10eeba27))
+
+
 ## v0.0.3 (2025-03-16)
 
 ### Bug Fixes
