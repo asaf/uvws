@@ -1,6 +1,19 @@
 # CHANGELOG
 
 
+## v0.0.4 (2025-03-17)
+
+### Bug Fixes
+
+- Bumping version to 0.0.7
+  ([`1d76e8f`](https://github.com/asaf/uvws/commit/1d76e8fed417117c31618b7e111078ed62648988))
+
+### Chores
+
+- Workflow update
+  ([`058069b`](https://github.com/asaf/uvws/commit/058069bdad370c0178966957eaa5a18ed7c184a3))
+
+
 ## v0.0.3 (2025-03-17)
 
 ### Bug Fixes
