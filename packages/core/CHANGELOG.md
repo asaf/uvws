@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v0.0.18 (2025-03-17)
+
+### Bug Fixes
+
+- **core**: Nice
+  ([`b0368fa`](https://github.com/asaf/uvws/commit/b0368fab11daf868e67e248a44f4d792dfae47a3))
+
+
 ## v0.0.17 (2025-03-17)
 
 ### Bug Fixes
