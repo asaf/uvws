@@ -11,9 +11,15 @@ permissions:
 
 jobs:
   # release-core:
-  #   uses: ./.github/workflows/release-package.yml
-  #   with:
-  #     package: core
+    - name: Setup | Checkout Repository
+      uses: actions/checkout@v4
+      with:
+        ref: ${{ github.ref_name }}
+        fetch-depth: 0
+    - name: Release | Call reusable package workflow
+      uses: ./.github/workflows/release-package.yml
+    with:
+      package: core
 
   release-svc1:
     runs-on: ubuntu-latest
