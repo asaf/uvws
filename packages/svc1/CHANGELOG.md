@@ -1,6 +1,26 @@
 # CHANGELOG
 
 
+## v0.0.5 (2025-03-17)
+
+### Bug Fixes
+
+- **svc1**: Yey
+  ([`c9f6dbc`](https://github.com/asaf/uvws/commit/c9f6dbc5dd42e6c40116803770705eedb1004dea))
+
+- **svc1**: Yey
+  ([`53b7de3`](https://github.com/asaf/uvws/commit/53b7de375a2cff2edd671c54f1c37623fca592c5))
+
+- **svc1**: Yey
+  ([`c099a5a`](https://github.com/asaf/uvws/commit/c099a5ad82fb45097aee979c8daafcc8bcf07f4b))
+
+- **svc1**: Yey
+  ([`686e857`](https://github.com/asaf/uvws/commit/686e85731ec1e9ac4c8e8fc3771214fadea0413b))
+
+- **svc1**: Yey
+  ([`e00a611`](https://github.com/asaf/uvws/commit/e00a611e3dfca42f6e32b92547b6f75afdd1578c))
+
+
 ## v0.0.4 (2025-03-17)
 
 ### Bug Fixes
