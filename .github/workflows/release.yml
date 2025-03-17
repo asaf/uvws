@@ -71,8 +71,15 @@ jobs:
         run: |
           cd chat
           pnpm build
-          mkdir -p ../packages/svc1/static
           mv dist ../packages/svc1/static/
+
+      - name: Listing files in package/svc1/static
+        if: matrix.package == 'svc1'
+        run: ls -la ./packages/svc1
+
+      - name: Listing files in package/svc1/static
+        if: matrix.package == 'svc1'
+        run: ls -la ./packages/svc1/static
 
       - name: Action | Semantic Version Release (${{ matrix.package }} package)
         id: release_package
