@@ -10,8 +10,6 @@ on:
 jobs:
   release-package:
     runs-on: ubuntu-latest
-    env:
-      GITHUB_ACTOR: "asaf"
     concurrency:
       group: ${{ github.workflow }}-release-${{ inputs.package }}-${{ github.ref_name }}
       cancel-in-progress: false
@@ -27,37 +25,16 @@ jobs:
           ref: ${{ github.ref_name }}
           fetch-depth: 0
 
-      - name: Evaluate | Verify upstream has NOT changed
-        shell: bash
-        run: ./scripts/verify-upstream.sh
-
       - name: Setup | Force release branch to be at workflow sha
         run: |
           git reset --hard ${{ github.sha }}
 
+      - name: Evaluate | Verify upstream has NOT changed
+        shell: bash
+        run: ./scripts/verify-upstream.sh
+
       - name: Sync Dependencies | Update ${{ inputs.package }}'s workspace dependencies
         run: python scripts/update_package_deps.py ${{ inputs.package }}
-
-      - name: Setup | Install Node.js (if svc1)
-        if: inputs.package == 'svc1'
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: 'pnpm'
-          cache-dependency-path: chat/pnpm-lock.yaml
-
-      - name: Install | Install Dependencies for UI (if svc1)
-        if: inputs.package == 'svc1'
-        run: |
-          cd chat
-          pnpm install --frozen-lockfile
-
-      - name: Build | Build UI for svc1
-        if: inputs.package == 'svc1'
-        run: |
-          cd chat
-          pnpm build
-          mv dist ../packages/svc1/static/
 
       - name: Action | Semantic Version Release (${{ inputs.package }} package)
         id: release_package
