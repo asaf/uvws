@@ -28,7 +28,6 @@ members = ["packages/core", "packages/svc1"]
 [dependency-groups]
 dev = [
     "python-semantic-release>=9.21.0",
-    "tomli-w>=1.2.0",
 ]
 
 [tool.semantic_release]
