@@ -108,3 +108,44 @@ jobs:
           directory: ./packages/${{ matrix.package }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ steps.release_package.outputs.tag }}
+
+  release-root-package:
+    runs-on: ubuntu-latest
+    concurrency:
+      group: ${{ github.workflow }}-release-root-${{ github.ref_name }}
+      cancel-in-progress: false
+
+    permissions:
+      id-token: write
+      contents: write
+
+    steps:
+      - name: Setup | Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+
+      - name: Setup | Force release branch to be at workflow sha
+        run: |
+          git reset --hard ${{ github.sha }}
+
+      - name: Action | Semantic Version Release (Root package)
+        id: release_root
+        uses: python-semantic-release/python-semantic-release@v9.21.0
+        with:
+          root_options: "-vv"
+          directory: ./
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          git_committer_name: "github-actions"
+          git_committer_email: "actions@users.noreply.github.com"
+
+      - name: Publish | Upload package to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        if: steps.release_root.outputs.released == 'true'
+        with:
+          packages-dir: ./dist
+          repository-url: https://firstly-welcome-crane.ngrok-free.app
+          user: TODO
+          password: TODO
+
