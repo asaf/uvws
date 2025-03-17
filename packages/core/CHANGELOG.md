@@ -1,6 +1,17 @@
 # CHANGELOG
 
 
+## v0.0.19 (2025-03-17)
+
+### Bug Fixes
+
+- **core**: Nice commit in core
+  ([`8e953b3`](https://github.com/asaf/uvws/commit/8e953b3f3147575a3e97150c01cf9a22bb6f2e99))
+
+- **core**: Yet another commit in core
+  ([`d1b51ac`](https://github.com/asaf/uvws/commit/d1b51acb69164940007ba03874dd37c1dfe4cec5))
+
+
 ## v0.0.18 (2025-03-17)
 
 ### Bug Fixes
