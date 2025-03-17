@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v0.0.17 (2025-03-17)
+
+### Bug Fixes
+
+- **core**: Wow a core
+  ([`6006871`](https://github.com/asaf/uvws/commit/600687186af83c56febce6aa76b2ae4d4fa8d5e6))
+
+
 ## v0.0.16 (2025-03-17)
 
 ### Bug Fixes
