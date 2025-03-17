@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v0.0.7 (2025-03-17)
+
+### Bug Fixes
+
+- **svc1**: A cool print
+  ([`f419c30`](https://github.com/asaf/uvws/commit/f419c30b6d9826f7d58a5d046cd7b3dd64566d4a))
+
+
 ## v0.0.6 (2025-03-17)
 
 ### Bug Fixes
