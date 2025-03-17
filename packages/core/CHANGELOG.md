@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v0.0.15 (2025-03-17)
+
+### Bug Fixes
+
+- **core**: A minor change to 0.0.15
+  ([`c8848e3`](https://github.com/asaf/uvws/commit/c8848e3291426b7f9e92c964828cac28c03f4b69))
+
+
 ## v0.0.14 (2025-03-17)
 
 ### Bug Fixes
