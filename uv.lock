@@ -97,7 +97,7 @@ wheels = [
 
 [[package]]
 name = "core"
-version = "0.0.14"
+version = "0.0.15"
 source = { editable = "packages/core" }
 
 [package.metadata]
@@ -416,7 +416,7 @@ wheels = [
 
 [[package]]
 name = "svc1"
-version = "0.0.6"
+version = "0.0.7"
 source = { editable = "packages/svc1" }
 dependencies = [
     { name = "core" },
@@ -429,6 +429,15 @@ requires-dist = [
     { name = "core", editable = "packages/core" },
     { name = "fastapi", specifier = ">=0.115.11" },
     { name = "uvicorn", specifier = ">=0.34.0" },
+]
+
+[[package]]
+name = "tomli-w"
+version = "1.2.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/19/75/241269d1da26b624c0d5e110e8149093c759b7a286138f4efd61a60e75fe/tomli_w-1.2.0.tar.gz", hash = "sha256:2dd14fac5a47c27be9cd4c976af5a12d87fb1f0b4512f81d69cce3b35ae25021", size = 7184 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/c7/18/c86eb8e0202e32dd3df50d43d7ff9854f8e0603945ff398974c1d91ac1ef/tomli_w-1.2.0-py3-none-any.whl", hash = "sha256:188306098d013b691fcadc011abd66727d3c414c571bb01b1a174ba8c983cf90", size = 6675 },
 ]
 
 [[package]]
@@ -473,7 +482,7 @@ wheels = [
 
 [[package]]
 name = "uvws"
-version = "0.0.1"
+version = "0.0.4"
 source = { editable = "." }
 dependencies = [
     { name = "svc1" },
@@ -482,13 +491,17 @@ dependencies = [
 [package.dev-dependencies]
 dev = [
     { name = "python-semantic-release" },
+    { name = "tomli-w" },
 ]
 
 [package.metadata]
 requires-dist = [{ name = "svc1", editable = "packages/svc1" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "python-semantic-release", specifier = ">=9.21.0" }]
+dev = [
+    { name = "python-semantic-release", specifier = ">=9.21.0" },
+    { name = "tomli-w", specifier = ">=1.2.0" },
+]
 
 [[package]]
 name = "wrapt"
