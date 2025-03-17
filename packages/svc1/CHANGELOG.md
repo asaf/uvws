@@ -1,6 +1,25 @@
 # CHANGELOG
 
 
+## v0.0.9 (2025-03-17)
+
+### Bug Fixes
+
+- **svc1**: Core version printed
+  ([`12c08f0`](https://github.com/asaf/uvws/commit/12c08f09a81ad85944c750de5d0e9937e6d8dac2))
+
+- **svc1**: Nice
+  ([`baac55c`](https://github.com/asaf/uvws/commit/baac55cf7c9a254819b5385223e2e5a624b70f34))
+
+- **svc1**: Wow svc1
+  ([`4834760`](https://github.com/asaf/uvws/commit/48347609dc5e4adc28009249cd94da33b46faeb7))
+
+### Chores
+
+- **svc1**: Update workspace dependencies [skip ci]
+  ([`0ed145c`](https://github.com/asaf/uvws/commit/0ed145cc042598f0d642c1144f5ad92cd1abfa76))
+
+
 ## v0.0.8 (2025-03-17)
 
 ### Bug Fixes
