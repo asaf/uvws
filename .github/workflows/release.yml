@@ -12,18 +12,12 @@ permissions:
 jobs:
   release-core:
     uses: ./.github/workflows/release-package.yml
-    concurrency:
-      group: ${{ github.workflow }}-release-core-${{ github.ref_name }}
-      cancel-in-progress: true
     with:
       package: core
 
   release-svc1:
     runs-on: ubuntu-latest
     needs: release-core
-    concurrency:
-      group: ${{ github.workflow }}-release-svc1-${{ github.ref_name }}
-      cancel-in-progress: true
 
     steps:
       - name: Setup | Checkout Repository
