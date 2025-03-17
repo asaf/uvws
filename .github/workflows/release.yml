@@ -6,116 +6,20 @@ on:
       - main
 
 jobs:
-  release-packages:
+  release-core:
+    uses: ./.github/workflows/release-package.yml
+    with:
+      package: core
+
+  release-svc1:
+    uses: ./.github/workflows/release-package.yml
+    needs: release-core  # Ensure `core` is built first
+    with:
+      package: svc1
+
+  release-root:
     runs-on: ubuntu-latest
-    env:
-      GITHUB_ACTOR: "asaf"  
-    concurrency:
-      group: ${{ github.workflow }}-release-${{ github.ref_name }}
-      cancel-in-progress: false
-
-    permissions:
-      id-token: write
-      contents: write
-
-    strategy:
-      matrix:
-        package:
-          - core
-          - svc1
-
-    steps:
-      # Note: We checkout the repository at the branch that triggered the workflow
-      # with the entire history to ensure to match PSR's release branch detection
-      # and history evaluation.
-      # However, we forcefully reset the branch to the workflow sha because it is
-      # possible that the branch was updated while the workflow was running. This
-      # prevents accidentally releasing un-evaluated changes.
-      - name: Setup | Checkout Repository on Release Branch
-        uses: actions/checkout@v4
-        with:
-          ref: ${{ github.ref_name }}
-          fetch-depth: 0
-
-      - name: Evaluate | Verify upstream has NOT changed
-        shell: bash
-        run: ./scripts/verify-upstream.sh
-
-      - name: Setup | Force release branch to be at workflow sha
-        run: |
-          git reset --hard ${{ github.sha }}
-
-      # Only build the UI if the package is 'svc1'
-      - name: Force Install Corepack and Enable
-        if: matrix.package == 'svc1'
-        run: npm install -g corepack && corepack enable
-
-      - name: Setup | Install Node.js
-        if: matrix.package == 'svc1'
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: 'pnpm'
-          cache-dependency-path: chat/pnpm-lock.yaml
-
-      # https://github.com/actions/setup-node/issues/1222
-      # once resolved, replace with `- run: corepack enable`
-      - name: Force Install Corepack and Enable
-        if: matrix.package == 'svc1'
-        run: npm install -g corepack && corepack enable
-      
-      - name: Install | Install Dependencies for UI
-        if: matrix.package == 'svc1'
-        run: |
-          cd chat
-          pnpm install --frozen-lockfile
-
-      - name: Build | Build UI for svc1
-        if: matrix.package == 'svc1'
-        run: |
-          cd chat
-          pnpm build
-          mv dist ../packages/svc1/static/
-
-      - name: Listing files in package/svc1/static
-        if: matrix.package == 'svc1'
-        run: ls -la ./packages/svc1
-
-      - name: Listing files in package/svc1/static
-        if: matrix.package == 'svc1'
-        run: ls -la ./packages/svc1/static
-
-      - name: Action | Semantic Version Release (${{ matrix.package }} package)
-        id: release_package
-        uses: python-semantic-release/python-semantic-release@v9.21.0
-        with:
-          root_options: "-vv"
-          directory: ./packages/${{ matrix.package }}
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          git_committer_name: "github-actions"
-          git_committer_email: "actions@users.noreply.github.com"
-
-      - name: Publish | Upload package to PyPI
-        uses: pypa/gh-action-pypi-publish@release/v1
-        if: steps.release_package.outputs.released == 'true'
-        with:
-          packages-dir: ./dist
-          repository-url: https://firstly-welcome-crane.ngrok-free.app
-          user: TODO
-          password: TODO
-
-      - name: Publish | Upload to GitHub Release Assets (${{ matrix.package }} package)
-        uses: python-semantic-release/publish-action@v9.21.0
-        if: steps.release_package.outputs.released == 'true'
-        with:
-          root_options: "-vv"
-          directory: ./packages/${{ matrix.package }}
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          tag: ${{ steps.release_package.outputs.tag }}
-
-  release-root-package:
-    runs-on: ubuntu-latest
-    needs: release-packages
+    needs: [release-core, release-svc1]
     concurrency:
       group: ${{ github.workflow }}-release-root-${{ github.ref_name }}
       cancel-in-progress: false
@@ -138,6 +42,9 @@ jobs:
       - name: Setup | Force release branch to be at workflow sha
         run: |
           git reset --hard ${{ github.sha }}
+
+      - name: Sync Dependencies | Update root's workspace dependencies
+        run: python scripts/update_package_deps.py root
 
       - name: Action | Semantic Version Release (Root package)
         id: release_root
@@ -165,4 +72,3 @@ jobs:
           root_options: "-vv"
           github_token: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ steps.release_root.outputs.tag }}
-

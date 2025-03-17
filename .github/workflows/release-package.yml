@@ -1,0 +1,88 @@
+name: Release Package
+
+on:
+  workflow_call:
+    inputs:
+      package:
+        required: true
+        type: string
+
+jobs:
+  release-package:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_ACTOR: "asaf"
+    concurrency:
+      group: ${{ github.workflow }}-release-${{ inputs.package }}-${{ github.ref_name }}
+      cancel-in-progress: false
+
+    permissions:
+      id-token: write
+      contents: write
+
+    steps:
+      - name: Setup | Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+
+      - name: Evaluate | Verify upstream has NOT changed
+        shell: bash
+        run: ./scripts/verify-upstream.sh
+
+      - name: Setup | Force release branch to be at workflow sha
+        run: |
+          git reset --hard ${{ github.sha }}
+
+      - name: Sync Dependencies | Update ${{ inputs.package }}'s workspace dependencies
+        run: python scripts/update_package_deps.py ${{ inputs.package }}
+
+      - name: Setup | Install Node.js (if svc1)
+        if: inputs.package == 'svc1'
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+          cache-dependency-path: chat/pnpm-lock.yaml
+
+      - name: Install | Install Dependencies for UI (if svc1)
+        if: inputs.package == 'svc1'
+        run: |
+          cd chat
+          pnpm install --frozen-lockfile
+
+      - name: Build | Build UI for svc1
+        if: inputs.package == 'svc1'
+        run: |
+          cd chat
+          pnpm build
+          mv dist ../packages/svc1/static/
+
+      - name: Action | Semantic Version Release (${{ inputs.package }} package)
+        id: release_package
+        uses: python-semantic-release/python-semantic-release@v9.21.0
+        with:
+          root_options: "-vv"
+          directory: ./packages/${{ inputs.package }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          git_committer_name: "github-actions"
+          git_committer_email: "actions@users.noreply.github.com"
+
+      - name: Publish | Upload package to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        if: steps.release_package.outputs.released == 'true'
+        with:
+          packages-dir: ./dist
+          repository-url: https://firstly-welcome-crane.ngrok-free.app
+          user: TODO
+          password: TODO
+
+      - name: Publish | Upload to GitHub Release Assets (${{ inputs.package }} package)
+        uses: python-semantic-release/publish-action@v9.21.0
+        if: steps.release_package.outputs.released == 'true'
+        with:
+          root_options: "-vv"
+          directory: ./packages/${{ inputs.package }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ steps.release_package.outputs.tag }}
