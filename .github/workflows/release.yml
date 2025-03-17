@@ -60,13 +60,6 @@ jobs:
         if: matrix.package == 'svc1'
         run: npm install -g corepack && corepack enable
       
-      - name: Setup | Enable Corepack & Install Node.js
-        if: matrix.package == 'svc1'
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: 'pnpm'
-
       - name: Install | Install Dependencies for UI
         if: matrix.package == 'svc1'
         run: |
