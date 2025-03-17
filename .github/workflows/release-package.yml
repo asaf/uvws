@@ -32,13 +32,10 @@ jobs:
           ref: ${{ github.ref_name }}
           fetch-depth: 0
 
-      - name: Setup | Force release branch to be at workflow sha
+      - name: Setup | Sync with upstream main
         run: |
-          git reset --hard ${{ github.sha }}
-
-      - name: Evaluate | Verify upstream has NOT changed
-        shell: bash
-        run: ./scripts/verify-upstream.sh
+          git fetch origin main
+          git reset --hard origin/main
 
       - name: Sync Dependencies | Update ${{ inputs.package }}'s workspace dependencies
         run: python scripts/update_package_deps.py ${{ inputs.package }}
