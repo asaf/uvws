@@ -3,6 +3,7 @@ import sysconfig
 from typing import Any
 
 import uvicorn
+from core import __version__ as core_version
 from fastapi import FastAPI, Response
 from fastapi.staticfiles import StaticFiles
 
@@ -38,5 +39,5 @@ app.mount("/chat", SPAStaticFiles(directory=static_dir), name="static")
 
 
 def start():
-    print("Starting the server : " + __version__)
+    print("Starting the server : " + __version__ + "with core version: " + core_version)
     uvicorn.run(app, host="0.0.0.0", port=8000)
