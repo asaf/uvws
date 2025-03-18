@@ -1,35 +1,14 @@
 on:
-  workflow_dispatch:
-    inputs:
-      package:
-        required: true
-        type: string
+    workflow_dispatch:
+      inputs:
+        package:
+          required: true
+          type: string
 
-name: Publish
+name: Publish Package
 
 jobs:
-  publish:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Setup | Checkout Repository
-        uses: actions/checkout@v4
+    release-core:
+        uses: ./.github/workflows/release-package.yml
         with:
-          ref: ${{ github.ref_name }}
-          fetch-depth: 0
-
-      - name: Install the latest version of uv
-        uses: astral-sh/setup-uv@v5
-        with:
-            version: "latest"
-  
-      - name: Build with uv
-        run: |
-          cd packages/core
-          uv build
-
-      - name: Publish | Upload package to PyPI
-        uses: pypa/gh-action-pypi-publish@release/v1
-        with:
-          packages-dir: ./dist
-          repository-url: https://test.pypi.org/legacy/
-          password: ${{ secrets.PYPI_TEST_PASSWORD }}
+            package: ${{ inputs.package }}

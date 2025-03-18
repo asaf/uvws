@@ -1,0 +1,35 @@
+on:
+  workflow_call:
+    inputs:
+      package:
+        required: true
+        type: string
+
+name: Publish Package
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup | Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+
+      - name: Install the latest version of uv
+        uses: astral-sh/setup-uv@v5
+        with:
+            version: "latest"
+  
+      - name: Build with uv
+        run: |
+          cd packages/${{ inputs.package }}
+          uv build
+
+      - name: Publish | Upload package to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          packages-dir: ./dist
+          repository-url: https://test.pypi.org/legacy/
+          password: ${{ secrets.PYPI_TEST_PASSWORD }}
