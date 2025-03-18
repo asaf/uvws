@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v0.1.1 (2025-03-18)
+
+### Bug Fixes
+
+- Update semantic release configuration for branch parsing
+  ([`4742c54`](https://github.com/asaf/uvws/commit/4742c54a4348b75dd0e6188fc18b7df2cb237d24))
+
+
 ## v0.1.0 (2025-03-17)
 
 ### Chores
