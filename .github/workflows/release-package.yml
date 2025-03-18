@@ -64,7 +64,6 @@ jobs:
         with:
           packages-dir: ./dist
           repository-url: https://test.pypi.org/legacy/
-          user: TODO
           password: ${{ secrets.PYPI_TEST_PASSWORD }}
 
       - name: Publish | Upload to GitHub Release Assets (${{ inputs.package }} package)
