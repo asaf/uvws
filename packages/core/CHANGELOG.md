@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v0.1.1 (2025-03-18)
+
+### Bug Fixes
+
+- **core**: A core change
+  ([`a5cb670`](https://github.com/asaf/uvws/commit/a5cb670f5baef4a541391b9dbd9f3eae07c58eb0))
+
+
 ## v0.1.0 (2025-03-17)
 
 ### Features
