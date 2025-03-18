@@ -1,9 +1,9 @@
 on:
-    workflow_call:
-        inputs:
-            package:
-                required: true
-                type: string
+  workflow_call:
+    inputs:
+      package:
+        required: true
+        type: string
 
 name: Publish
 
