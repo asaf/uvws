@@ -33,3 +33,4 @@ jobs:
           packages-dir: ./dist
           repository-url: https://test.pypi.org/legacy/
           password: ${{ secrets.PYPI_TEST_PASSWORD }}
+          verbose: true
