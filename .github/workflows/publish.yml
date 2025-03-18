@@ -13,6 +13,6 @@ name: Publish
 
 jobs:
     release-core:
-        uses: ./.github/workflows/release-package.yml
+        uses: ./.github/workflows/publish-module.yml
         with:
             package: ${{ inputs.package }}
