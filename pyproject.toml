@@ -45,11 +45,11 @@ version_variables = ["src/uvws/__init__.py:__version__"]
 [tool.semantic_release.commit_parser_options]
 path_filters=[".", "!packages/core/*", "!packages/svc1/*"]
 
-[semantic_release.branches.main]
+[tool.semantic_release.branches.main]
 match = "main"
 prerelease = false
 
-[semantic_release.branches.beta]
+[tool.semantic_release.branches.beta]
 match = "beta"
 prerelease = true
 prerelease_token = "beta"
