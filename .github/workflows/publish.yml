@@ -24,7 +24,7 @@ jobs:
   
       - name: Build with uv
         run: |
-          cd packages/${{ inputs.package }}
+          cd packages/core
           uv build
 
       - name: Publish | Upload package to PyPI
