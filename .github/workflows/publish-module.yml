@@ -4,6 +4,9 @@ on:
       package:
         required: true
         type: string
+    secrets:
+      PYPI_TEST_PASSWORD:
+        required: true  # Declare that this secret is required
 
 name: Publish Package
 
@@ -32,5 +35,5 @@ jobs:
         with:
           packages-dir: ./dist
           repository-url: https://test.pypi.org/legacy/
-          password: "MYTOKENHERE"
+          password: ${{ secrets.PYPI_TEST_PASSWORD }}
           verbose: true
