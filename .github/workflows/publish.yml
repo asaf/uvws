@@ -7,12 +7,12 @@ on:
 
 permissions:
   contents: write
-  id-token: write
+#   id-token: write
 
 name: Publish
 
 jobs:
-    release-core:
+    publish-package:
         uses: ./.github/workflows/publish-module.yml
         with:
             package: ${{ inputs.package }}
